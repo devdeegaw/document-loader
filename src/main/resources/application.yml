@@ -35,5 +35,5 @@ spring:
 
 file:
   supplier:
-    directory: /Users/uk45382004/Documents/sample-doc
+    directory: #/Users/Documents/sample-doc
     filename: regex=.*\.(pdf|docx|txt)
