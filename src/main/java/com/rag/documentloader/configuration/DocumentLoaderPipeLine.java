@@ -19,7 +19,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -75,22 +74,23 @@ public class DocumentLoaderPipeLine {
           var firstDocument = documents.getFirst();
 
           var title = chatClient.prompt()
-            .user(userSpec -> userSpec
-              .text(nameOfTheDocumentTemplateResource)
-              .param("document", firstDocument.getText()))
-            .call()
-            .entity(DocumentTitle.class);
+                  .user(userSpec -> userSpec
+                          .text(nameOfTheDocumentTemplateResource)
+                          .param("document", firstDocument.getText()))
+                  .call()
+                  .entity(DocumentTitle.class);
 
-          if (Objects.requireNonNull(title).title().equals("UNKNOWN")) {
+          if (title == null) {
             LOGGER.warn("Unable to determine the name of a document adding to vector store without title.");
             documents = documents.stream().toList();
-          }
+          } else {
 
-          LOGGER.info("Determined document title to be {}", title.title());
-          documents = documents.stream().peek(document -> {
-            document.getMetadata()
-              .put("title", title.getNormalizedTitle());
-          }).toList();
+            LOGGER.info("Determined document title to be {}", title.title());
+            documents = documents.stream().peek(document -> {
+              document.getMetadata()
+                      .put("title", title.getNormalizedTitle());
+            }).toList();
+          }
         }
 
         return documents;
