@@ -4,13 +4,13 @@ server:
 spring:
   application:
     name: document-loader
-    ai:
-      ollama:
-        base-url: http://localhost:11434
-        embedding:
-          model: nomic-embed-text
-        chat:
-          model: llama3.2:1b
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      embedding:
+        model: nomic-embed-text
+      chat:
+        model: llama3.2:1b
     vectorstore:
       qdrant:
         host: 'localhost'
