@@ -1,5 +1,5 @@
 server:
-  port: 0
+  port: 8080
 
 spring:
   application:
@@ -16,7 +16,7 @@ spring:
         host: 'localhost'
         port: 6334
         initialize-schema: true
-        collection-name: Documents
+        collection-name: DocumentsV1
 
   cloud:
     function:
@@ -25,5 +25,5 @@ spring:
 
 file:
   supplier:
-    directory: /Users/devgawade/Documents/sample-doc
+    directory: /Users/sagarmehendale/Documents/Training/GCP
     filename: regex=.*\.(pdf|docx|txt)
