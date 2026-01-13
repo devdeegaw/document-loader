@@ -1,4 +1,4 @@
-package com.rag.documentloader.configuration;
+package com.rag.documentloader.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.vectorstore.SearchRequest;
