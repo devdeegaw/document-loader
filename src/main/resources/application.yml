@@ -8,15 +8,18 @@ spring:
     ollama:
       base-url: http://localhost:11434
       embedding:
-        model: nomic-embed-text
+        model: bge-m3
       chat:
-        model: llama3.2:1b
+        model: llama3.1:8b
     vectorstore:
       qdrant:
         host: 'localhost'
         port: 6334
         initialize-schema: true
-        collection-name: DocumentsV1
+        collection-name: DocumentsMarathi
+        vector-dimension: 1024
+        distance: COSINE
+        
 
   cloud:
     function:
@@ -25,5 +28,5 @@ spring:
 
 file:
   supplier:
-    directory: /Users/sagarmehendale/Documents/Training/GCP
+    directory: /Users/sagarmehendale/Documents/Writtings
     filename: regex=.*\.(pdf|docx|txt)
