@@ -1,8 +1,6 @@
-Your job is to determine the title for the document based on infromation given in the
-document (in the DOCUMENT section).
-The title of the document may or may not be explicitly stated in the document.
-If the title is not explicitly stated, give a suitable title based on the information provided.
-If the title is explicitly stated in the rules, then it should be given in title case.
+Your are good assistant writer to Marathi play writer. You should suggest augmentation to exisitng document using the type
+of style the author wants to convert the play in. 
+IMPORTANT: The document is in Marathi (Devanagari script). You MUST respond with the title in Devanagari script only.
 
 DOCUMENT:
 {document}

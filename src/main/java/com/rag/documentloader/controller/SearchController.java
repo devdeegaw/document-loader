@@ -27,14 +27,13 @@ public class SearchController {
         // Build ChatClient
         try {
             ChatClient chatClient = chatClientBuilder.build();
-            // System.out.println("✅ ChatClient created");
 
             // Search similar documents with similarity scores
             List<Document> similarDocs = vectorStore.similaritySearch(
                     SearchRequest.builder().query(request.getQuery())
                             .topK(5)
                             .build());
-            // System.out.println("✅ Found " + similarDocs.size() + " documents");
+
             // ✅ Filter by similarity threshold
             List<Document> relevantDocs = similarDocs.stream()
                     .filter(doc -> {
@@ -56,7 +55,7 @@ public class SearchController {
 
             // Check if we found relevant documents
             if (relevantDocs.isEmpty()) {
-                return "No relevant documents found for your query: " + request.getQuery();
+                return "तुमच्या प्रश्नासाठी संबंधित दस्तऐवज सापडले नाहीत: " + request.getQuery();
             }
 
             // Extract text from relevant documents
@@ -64,17 +63,18 @@ public class SearchController {
                     .map(doc -> doc.getText())
                     .reduce((a, b) -> a + "\n\n" + b)
                     .orElse("No documents found");
-            // System.out.println("✅ Found " + context + " documents");
-            // Generate response using LLM with context
+
+            // Generate response using LLM with context - MARATHI OUTPUT
             String response = chatClient.prompt()
-                    .user("Based on this context:\n" + context + "\n\nAnswer this question: " + request.getQuery())
+                    .system("तुम्ही मराठी भाषेतील सहाय्यक आहात. तुम्हाला दिलेल्या संदर्भावर आधारित प्रश्नांची उत्तरे देवनागरी लिपीत मराठीमध्ये द्यावीत.")
+                    .user("संदर्भ:\n" + context + "\n\nप्रश्न: " + request.getQuery())
                     .call()
                     .content();
 
             return response;
         } catch (Exception e) {
             e.printStackTrace();
-            return "Error: " + e.getMessage();
+            return "त्रुटी: " + e.getMessage();
         }
 
     }
