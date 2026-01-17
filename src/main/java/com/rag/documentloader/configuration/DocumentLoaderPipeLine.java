@@ -41,10 +41,12 @@ public class DocumentLoaderPipeLine {
     @Bean
     Function<Flux<byte[]>, Flux<Document>> documentReader() {
         return resourceFlux -> resourceFlux
-                .map(fileBytes -> new TikaDocumentReader(
-                        new ByteArrayResource(fileBytes))
-                        .get()
-                        .getFirst())
+                .map(fileBytes -> {
+                    var resource = new ByteArrayResource(fileBytes);
+                    var docs = new TikaDocumentReader(resource).get();
+                    return docs.isEmpty() ? null : docs.getFirst();
+                })
+                .filter(Objects::nonNull)
                 .subscribeOn(Schedulers.boundedElastic());
     }
 

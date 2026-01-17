@@ -16,7 +16,7 @@ spring:
         host: 'localhost'
         port: 6334
         initialize-schema: true
-        collection-name: DocumentsMarathi
+        collection-name: DocumentsCodeBase
         vector-dimension: 1024
         distance: COSINE
         
@@ -28,5 +28,5 @@ spring:
 
 file:
   supplier:
-    directory: /Users/sagarmehendale/Documents/Writtings
-    filename: regex=.*\.(pdf|docx|txt)
+    directory: /Users/sagarmehendale/Documents/Projects/Local RAG_devd/document-loader/src/main/java/com/rag/documentloader/configuration
+    extensions: java,py,js,ts,cpp,c,go,rs,kt,scala,rb,php,cs,swift,yml,yaml,xml,json,md,txt,pdf,docx,html,htm

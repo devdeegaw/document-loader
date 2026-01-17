@@ -15,7 +15,7 @@ public class SearchController {
 
     private final VectorStore vectorStore;
     private final ChatClient.Builder chatClientBuilder;
-    private static final double SIMILARITY_THRESHOLD = 0.5;
+    private static final double SIMILARITY_THRESHOLD = 0.1;
 
     public SearchController(VectorStore vectorStore, ChatClient.Builder chatClientBuilder) {
         this.vectorStore = vectorStore;
@@ -55,7 +55,7 @@ public class SearchController {
 
             // Check if we found relevant documents
             if (relevantDocs.isEmpty()) {
-                return "तुमच्या प्रश्नासाठी संबंधित दस्तऐवज सापडले नाहीत: " + request.getQuery();
+                return "No relevant documents found for your query: " + request.getQuery();
             }
 
             // Extract text from relevant documents
@@ -66,15 +66,15 @@ public class SearchController {
 
             // Generate response using LLM with context - MARATHI OUTPUT
             String response = chatClient.prompt()
-                    .system("तुम्ही मराठी भाषेतील सहाय्यक आहात. तुम्हाला दिलेल्या संदर्भावर आधारित प्रश्नांची उत्तरे देवनागरी लिपीत मराठीमध्ये द्यावीत.")
-                    .user("संदर्भ:\n" + context + "\n\nप्रश्न: " + request.getQuery())
+                    .system("Give response in Jira user story format use model given in templates")
+                    .user("context:\n" + context + "\n\nQuery: " + request.getQuery())
                     .call()
                     .content();
 
             return response;
         } catch (Exception e) {
             e.printStackTrace();
-            return "त्रुटी: " + e.getMessage();
+            return "Error: " + e.getMessage();
         }
 
     }
