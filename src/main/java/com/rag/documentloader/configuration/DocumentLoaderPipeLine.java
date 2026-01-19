@@ -15,13 +15,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
-import org.springframework.util.DigestUtils;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
-
 import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -81,10 +77,8 @@ public class DocumentLoaderPipeLine {
                             documents = documents.stream().toList();
                         } else {
                             LOGGER.info("Determined document title to be {}", title.getTitle());
-                            documents = documents.stream().peek(document -> {
-                                document.getMetadata()
-                                        .put("title", title.getNormalizedTitle());
-                            }).toList();
+                            documents = documents.stream().peek(document -> document.getMetadata()
+                                    .put("title", title.getNormalizedTitle())).toList();
                         }
                     }
                     return documents;
