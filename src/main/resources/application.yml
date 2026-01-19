@@ -16,7 +16,7 @@ spring:
         host: 'localhost'
         port: 6334
         initialize-schema: true
-        collection-name: DocumentsV1
+        collection-name: Documents
 
   cloud:
     function:
