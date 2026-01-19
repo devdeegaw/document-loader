@@ -8,16 +8,24 @@ spring:
     ollama:
       base-url: http://localhost:11434
       embedding:
-        model: bge-m3
+        model: nomic-embed-text
+        options:
+          temperature: 0.1
       chat:
-        model: llama3.1:8b
+        model: llama3.2:1b
+        options:
+          temperature: 0.7
+          top-p: 0.9
+          top-k: 40
+          num-predict: 4096
+          repeat-penalty: 1.1
     vectorstore:
       qdrant:
         host: 'localhost'
         port: 6334
         initialize-schema: true
         collection-name: DocumentsCodeBase
-        vector-dimension: 1024
+        vector-dimension: 768
         distance: COSINE
         
 
@@ -28,5 +36,5 @@ spring:
 
 file:
   supplier:
-    directory: /Users/sagarmehendale/Documents/Projects/Local RAG_devd/document-loader/src/main/java/com/rag/documentloader/configuration
+    directory: /Users/sagarmehendale/Documents/FizzBuzz
     extensions: java,py,js,ts,cpp,c,go,rs,kt,scala,rb,php,cs,swift,yml,yaml,xml,json,md,txt,pdf,docx,html,htm
