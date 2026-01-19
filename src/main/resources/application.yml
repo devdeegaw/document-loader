@@ -1,23 +1,16 @@
 server:
-  port: 0
+  port: 8080
 
 spring:
   application:
     name: document-loader
   ai:
-    google:
-      genai:
-        api-key: ${GOOGLE_API_KEY}
-        base-url: https://generativelanguage.googleapis.com
-        embedding:
-          enabled: true
-          project-id:  ${GOOGLE_PROJECT_ID}
-          location: ${PROJECT_LOCATION}
-          api-key: ${GOOGLE_API_KEY}
-        chat:
-          options:
-            model:  gemini-2.0-flash-lite
-
+    ollama:
+      base-url: http://localhost:11434
+      embedding:
+        model: nomic-embed-text
+      chat:
+        model: llama3.2:1b
     vectorstore:
       qdrant:
         host: 'localhost'
@@ -28,12 +21,9 @@ spring:
   cloud:
     function:
       definition: fileSupplier,documentReader,splitter,titleDeterminer,vectorStoreConsumer
-  docker:
-    compose:
-      enabled: false
 
 
 file:
   supplier:
-    directory: #/Users/Documents/sample-doc
+    directory: docs
     filename: regex=.*\.(pdf|docx|txt)
