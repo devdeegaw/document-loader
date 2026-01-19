@@ -25,5 +25,5 @@ spring:
 
 file:
   supplier:
-    directory: /Users/sagarmehendale/Documents/Training/GCP
+    directory: docs
     filename: regex=.*\.(pdf|docx|txt)

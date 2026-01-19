@@ -1,4 +1,4 @@
-Your job is to determine the title for the document based on infromation given in the
+Your job is to determine the title for the document based on information given in the
 document (in the DOCUMENT section).
 The title of the document may or may not be explicitly stated in the document.
 If the title is not explicitly stated, give a suitable title based on the information provided.
